@@ -12,7 +12,7 @@ export class ChatPreviewComponent {
   onLongPress(ev:any){
     console.log('ev',ev)
     // ev.preventDefault()
-  console.log('chat pressed long')
+  console.log('chat pressed longg')
   }
 
   get lastMsgTime() {
