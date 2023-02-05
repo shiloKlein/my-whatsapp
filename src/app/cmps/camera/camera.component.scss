@@ -1,0 +1,59 @@
+.camera {
+    // background-image: url(https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674163167/whatsapp/message-bg_se7rl5.jpg);
+    background-color: black;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+
+    video {
+        // height: 100vh!important;
+        width: 100% ;
+    }
+
+
+    .picture-btn {
+        position: absolute;
+        bottom: 8vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+        z-index: 50;
+        transition: 0.2s;
+
+        &:hover {
+            width: 55px;
+            height: 55px;
+        }
+
+        &.clicked {
+            width: 55px;
+            height: 55px;
+        }
+    }
+}
+
+.back-btn {
+    display: grid;
+    place-items: center;
+    background-color: rgba(255, 255, 255, 0.286);
+    position: absolute;
+    bottom: 0;
+
+    left:5px span {
+        width: 0;
+    }
+}
+
+.canvas-container {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+
+    canvas {}
+}

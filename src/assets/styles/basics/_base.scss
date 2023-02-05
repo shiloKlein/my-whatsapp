@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    // background-color: $clr1;
+    // color: $clr6;
+}
+
+html {
+    font-family: montserrat;
+    // line-height: 1.6;
+}
+
+body {
+    font-size: rem(16px);
+    margin: 0;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: caveat;
+    font-family: helvetica-neue-normal
+    // margin: 0 0 0.6em;
+    // line-height: 1;
+}
+
+
+// img {
+    //     width: 100%;
+    // }
+    
+    p {
+        margin: 0;
+        font-family: helvetica-neue-normal
+        // max-width: 40ch;
+    }
+    
+    a {
+        text-decoration: none;
+        transition: 0.2s;
+        font-family: helvetica-neue-normal
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    button {
+        border: none;
+        cursor: pointer;
+        font-family: helvetica-neue-normal
+}
+ul{
+padding:0;
+margin: 0;
+}
+li{
+list-style: none;
+}
+
+// /* width */
+// ::-webkit-scrollbar {
+//     width: 11px;
+//     border-radius: 2em;
+//     background-color: #c9ced3;
+// }
+
+// /* Track */
+// ::-webkit-scrollbar-track {
+//     background-color: rgb(234, 234, 234);
+//     border-radius: 5em;
+//     // border-radius: .2em;
+// }
+
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//     // background: #888;
+//     box-shadow: inset 0 0 15px #dbc6ef;
+//     background-color: transparent;
+//     border-radius: 5em;
+    
+// }
+
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//     // border-radius: 2em;
+//     box-shadow: inset 0 0 20px #c0abd4;
+// }
+
+// .selected1 {
+//     // border: 5px dashed $primary-clr;
+//     position: relative;
+//     &::before {
+//         content: "";
+//         pointer-events: none;
+//         position: absolute;
+//         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23873DC8FF' stroke-width='6' stroke-dasharray='6%2c 18' stroke-dashoffset='51' stroke-linecap='square'/%3e%3c/svg%3e");
+//         width: 100%;
+//         height: 100%;
+//         z-index: 9;
+//     }
+// }
+

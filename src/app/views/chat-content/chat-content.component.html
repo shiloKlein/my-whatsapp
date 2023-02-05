@@ -1,0 +1,32 @@
+<section class="chat-content" *ngIf="loggedInUser">
+    <chat-header [participants]="chat.participants" [groupName]="chat.name" [imgUrl]="chat.imgUrl"
+        [isGroup]="chat.isGroup">
+    </chat-header>
+    <div class="messages-container flex column">
+
+        <div *ngFor="let message of chat.messages" [class.owner-message]="checkOwner(message.from._id)"
+            class="message-container flex column">
+
+            <p *ngIf="message.isText" class="content"> {{message.content}}</p>
+
+            <audio controls *ngIf="message.isRecording">
+                <source [src]="message.content" type="audio/ogg">
+            </audio>
+            <!-- <audio *ngIf="message.isRecording" [src]="message.content" controls></audio> -->
+
+            <video *ngIf="message.isVideo" [src]="message.content" controls></video>
+
+            <img *ngIf="message.isImg" [src]="message.content" controls/>
+
+
+            <p class="time"> {{message.createdAt|date:'shortTime'}}
+            </p>
+        </div>
+    </div>
+    <send-bar (msgSended)="sendMsg($event)" (recMsgSended)="sendRecording($event)" (imgMsgSended)="sendImg($event)"></send-bar>
+    <!-- <p>chat-content works!</p> -->
+    <!-- <div *ngIf="chat">
+        {{chat.createdAt}}
+        {{chat._id}}
+    </div> -->
+</section>

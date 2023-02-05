@@ -1,0 +1,16 @@
+<section class="camera-container">
+    <div *ngIf="videoActive" class="camera">
+        <button class="picture-btn" (click)="takePicture()">
+        </button>
+        <button class="back-btn" (click)="closeCamera()">
+            <span class="material-symbols-outlined">
+                arrow_back_ios
+                </span>
+        </button>
+        <video>
+        </video>
+    </div>
+    <div *ngIf="pictureTaken" class="canvas-container flex column align-center justify-center">
+        <canvas id="canvas" width="320" height="240"></canvas>
+    </div>
+</section>

@@ -1,0 +1,55 @@
+<section class="chat-header main-layout">
+    <div *ngIf="!isSearch" class="chat-header-container flex align-center">
+        
+        <a routerLink="/"><span class="material-symbols-outlined back-arrow" >
+            arrow_back_ios
+            </span></a>
+        
+        <div class="group-img">
+            <img [src]="imgUrl" alt="">
+        </div>
+        <div class="group-details flex column">
+            <p class="group-name">{{groupName}}</p>
+            <p *ngIf="isGroup" class="participants-list flex"><span
+                    *ngFor="let participant of participants">{{participant.name}},</span>
+
+            </p>
+        </div>
+        <div class="actions flex">
+            <button (click)="openSearch()">
+                <span class="material-symbols-outlined new-chat">
+                    search
+                </span>
+            </button>
+            <button (click)="openMenu()">
+                <span class="material-symbols-outlined menu">
+                    more_vert
+                </span>
+            </button>
+
+
+        </div>
+    </div>
+
+
+    <div *ngIf="isSearch" class="chat-header-container search flex align-center">
+        <button (click)="closeSearch()" title="back">
+            <span class="material-symbols-outlined">
+                arrow_back
+            </span>
+        </button>
+
+        <input type="text" (input)="search()" placeholder="search">
+<button>
+    <span class="material-symbols-outlined">
+        expand_less
+    </span>
+</button>
+<button>
+    <span class="material-symbols-outlined">
+        expand_more
+    </span>
+</button>
+
+    </div>
+</section>

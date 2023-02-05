@@ -1,0 +1,75 @@
+@import '../../../assets/styles/setup/variables';
+.container{
+    width: 100vw;
+    &:hover{
+        cursor: pointer;
+        background-color:$bgc-primery ;
+    }
+}
+.chat-preview {
+    height: 4.5em;
+    min-width: 100%;
+
+    .preview-img {
+
+        img {
+            height: 3em;
+            padding: 5px;
+        }
+
+    }
+
+    .preview-details {
+        gap: 1em;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        border-bottom: 1px solid $bgc-primery;
+
+        .chat-name {}
+
+        font-size: 18px;
+
+        .chat-content {
+            width: 100%;
+            font-size: 14px;
+            color: rgb(126, 122, 122);
+            font-family: Arial, Helvetica, sans-serif;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-bottom: 35px;
+        }
+    }
+
+    .date-container {
+        height: 100%;
+        width: 100px;
+        position: relative;
+        justify-self: flex-end;
+        gap: 5px;
+        // border-bottom: 1px solid rgb(126, 122, 122);
+        // background-color: aqua;
+
+        .time {
+            position: absolute;
+            right:50%;
+            transform: translateX(50%);
+            top: 4px;
+        }
+        .unread-count {
+            position: absolute;
+            right:50%;
+            transform: translateX(50%);
+            bottom: 4px;
+            display: grid;
+            place-content: center;
+            background-color: $primary-green;
+            color:white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+    }
+}

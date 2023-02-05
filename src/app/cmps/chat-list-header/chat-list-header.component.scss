@@ -1,0 +1,38 @@
+@import '../../../assets/styles/setup/variables';
+
+.chat-list-header {
+    background-color: $secondery-green;
+
+    .logo-container {
+        gap: 10px;
+
+        p {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .img-container {
+            height: 45px;
+            width: 45px;
+            margin: 4px;
+            border-radius: 50%;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .options {
+        gap: 10px;
+    }
+
+    span {
+        color: white;
+
+        &:hover {
+            cursor: pointer
+        }
+    }
+}

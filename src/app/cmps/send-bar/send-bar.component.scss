@@ -1,0 +1,147 @@
+@import '../../../assets/styles/setup/variables';
+
+button {
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.send-bar {
+    background-color: $secondery-green;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 8vh;
+
+    .send-bar-container {
+
+        .send-voice-container {
+            padding-inline-end: 20px;
+            padding-inline-start: 10px;
+            align-self: flex-end;
+            padding-bottom: 5px;
+
+            button {
+                span {
+                    transition: 0.1s;
+                    color: white;
+                    font-variation-settings:
+                        'FILL' 0.9,
+                        'wght' 400,
+                        'GRAD' 0,
+                        'opsz' 48;
+
+                    &.recording {
+                        color: red;
+                        // font-size: 2em;
+                        transform: scale(1.2);
+                    }
+                }
+            }
+
+            // &:hover {
+            //     cursor: pointer
+            // }
+        }
+
+        .input-container {
+            background-color: #fff;
+            border-radius: 20px;
+            padding-inline-start: 10px;
+            padding-inline-end: 10px;
+            flex: 1;
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+            // max-width: 100%;
+            .camera-btn {
+                align-self: flex-end;
+
+            }
+
+            .add-btn {
+                align-self: flex-end;
+            }
+// TODO: MAKE THE INPUT BETTER
+            .message-input {
+                flex: 1;
+                // width: 150px;
+                max-width: 90%;
+                input{
+                    word-wrap: break-word;
+                    word-break: break-word;
+                    white-space: pre-wrap;
+                    overflow: auto;
+                    max-height: 5em;
+                    width: 100%;
+                    align-items: center;
+                    border: 0;
+                    outline: 0px solid transparent;
+                }
+                :focus {
+                    // background-color: aqua;
+                }
+            }
+
+            .keyboard-type-btn {
+                align-self: flex-end;
+
+                
+                &:hover {
+                    cursor: pointer;
+                }
+
+                .keyboard-btn {}
+                
+                .emogi-btn {}
+            }
+            
+        }
+        
+        // input {
+            //     flex: 1;
+        //     height: 35px;
+        //     background-color: white;
+        //     font-size: 1.1em;
+        //     border: none;
+        //     border-radius: 1em;
+        //     padding-inline-start:10px ;
+        //     padding-inline-end:10px ;
+        //     overflow-wrap:break-word;
+
+        //     &:focus {
+        //         outline: 0px solid transparent;
+        //     }
+        // }
+
+        // .add-actions {
+        //     padding-inline-end: 10px;
+        //     padding-inline-start: 15px;
+        //     span{
+        //         color:white;
+        //         font-variation-settings:
+        //         'FILL' 0,
+        //         'wght' 300,
+        //         'GRAD' 0,
+        //         'opsz' 48;
+        // }
+        //     }
+        //     &:hover {
+        //         cursor: pointer
+        //     }
+    }
+    
+
+    
+}
+
+.camera-btn,
+.keyboard-btn {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}

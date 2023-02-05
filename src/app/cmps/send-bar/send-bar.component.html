@@ -1,0 +1,68 @@
+<section class="send-bar main-layout">
+    <div class="send-bar-container flex align-center" [ngClass]="{'camera-open': isCameraOn}" >
+
+        <div class="send-voice-container">
+            <button *ngIf="!newMessage" (mousedown)="onRecord($event)" (mouseup)="sendVoiceMsg($event)">
+                <span class="material-symbols-outlined" [class.recording]="isRecording">
+                    keyboard_voice
+                </span>
+            </button>
+            <button *ngIf="newMessage" (click)="sendMsg($event)">
+                <span class="material-symbols-outlined">
+                    send
+                </span>
+            </button>
+        </div>
+
+        <div class="input-container flex align-center">
+            <button class="camera-btn" (click)="toggleCamera()">
+                <span class="material-symbols-outlined">
+                    photo_camera
+                </span>
+            </button>
+            <button class="add-btn">
+                <span class="material-symbols-outlined">
+                    attach_file
+                </span>
+            </button>
+            <!-- <div class="message-input" contenteditable="true" [textContent]="newMessage"  (input)=updateInput($event) ></div> -->
+            <div class="message-input">
+                <input [(ngModel)]="newMessage">
+            </div>
+
+            <div class="keyboard-type-btn" (click)="toggleKeyboard()">
+                <span *ngIf="isEmoji" class="material-symbols-outlined keyboard-btn">
+                    keyboard
+                </span>
+
+                <span *ngIf="!isEmoji" class="material-symbols-outlined emoji-btn">
+                    sentiment_satisfied
+                </span>
+            </div>
+
+
+        </div>
+
+
+        
+    </div>
+    
+</section>
+<audio controls style="display:none;">
+    <source src="" type="audio/ogg">
+</audio>
+<camera *ngIf="isCameraOn" (imgSended)="sendPicture($event)" (cameraClosed)=" toggleCamera()"></camera>
+
+<!-- <video controls></video> -->
+
+
+    <!-- <input type="text" [(ngModel)]="newMessage" (keydown.enter)="sendMsg($event)"> -->
+    <!--         
+    <div class="add-actions">
+        <span class="material-symbols-outlined upload">
+            attach_file
+        </span>
+        <span class="material-symbols-outlined emoji">
+            mood
+        </span>
+    </div> -->

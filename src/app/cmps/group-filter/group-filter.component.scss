@@ -1,0 +1,34 @@
+// @import '../../../assets/styles/setup/variables';
+@import '../../../assets/styles/setup/variables';
+
+[contentEditable=true]:empty:before {
+    content: attr(placeholder);
+    opacity: 0.6;
+    padding-inline-start: 5px;
+  }
+
+.filter-container {
+    margin-top: 5px;
+
+    .text-filter {
+        flex: 1;
+        background-color: $bgc-primery;
+        padding: 5px;
+        border-radius: 15px;
+
+        :focus {
+            outline: 0px solid transparent;
+        }
+
+        div {
+            flex: 1;
+
+        }
+    }
+
+    button {
+        background-color: #fff;
+
+        &.selected {}
+    }
+}
