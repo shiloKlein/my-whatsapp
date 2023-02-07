@@ -1,0 +1,107 @@
+{
+  "configVersion": 1,
+  "timestamp": 1675766420374,
+  "index": "https://shiloklein.github.io/my-whatsapp/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://shiloklein.github.io/my-whatsapp/favicon.ico",
+        "https://shiloklein.github.io/my-whatsapp/index.html",
+        "https://shiloklein.github.io/my-whatsapp/main.63335209b57f751f.js",
+        "https://shiloklein.github.io/my-whatsapp/manifest.webmanifest",
+        "https://shiloklein.github.io/my-whatsapp/polyfills.3c044cbad05b11d0.js",
+        "https://shiloklein.github.io/my-whatsapp/runtime.c8300be582122307.js",
+        "https://shiloklein.github.io/my-whatsapp/styles.cf628c8bf06da1bf.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://shiloklein.github.io/my-whatsapp/Helvetica-Neue-bold.5344363c0ce53db7.ttf",
+        "https://shiloklein.github.io/my-whatsapp/Helvetica-Neue-normal.1cd1b03f97413f4c.ttf",
+        "https://shiloklein.github.io/my-whatsapp/assets/fonts/helvetica/Helvetica-Neue-bold.ttf",
+        "https://shiloklein.github.io/my-whatsapp/assets/fonts/helvetica/Helvetica-Neue-normal.ttf",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-128x128.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-144x144.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-152x152.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-192x192.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-384x384.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-512x512.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-72x72.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-96x96.png",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_base.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_forms.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_helpers.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_layout.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_links.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_functions.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_mixins.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_typography.scss",
+        "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_variables.scss"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://shiloklein.github.io/my-whatsapp/Helvetica-Neue-bold.5344363c0ce53db7.ttf": "f82fdebf82c123f10290cc4e767f1b0c6e54b93d",
+    "https://shiloklein.github.io/my-whatsapp/Helvetica-Neue-normal.1cd1b03f97413f4c.ttf": "69941d92a4a7d47540f9d35f070580a66b25e1e6",
+    "https://shiloklein.github.io/my-whatsapp/assets/fonts/helvetica/Helvetica-Neue-bold.ttf": "f82fdebf82c123f10290cc4e767f1b0c6e54b93d",
+    "https://shiloklein.github.io/my-whatsapp/assets/fonts/helvetica/Helvetica-Neue-normal.ttf": "69941d92a4a7d47540f9d35f070580a66b25e1e6",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://shiloklein.github.io/my-whatsapp/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_base.scss": "61eb68d27eb6b97c29ecd09d43509ff434be3c67",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_forms.scss": "acbdafed88c1a0db86c4ab13cd6740e2fe90d773",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_helpers.scss": "27ec15db51eeb683250cff84b9840ca2802a0700",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_layout.scss": "b83f6c590ef20289b02dcf97408d911d1b179665",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/basics/_links.scss": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_functions.scss": "2f0ebc1a4cd1d93444814794dde326346b1fa283",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_mixins.scss": "c334b75b0859e3d48c2226edb122dd5e0e684d51",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_typography.scss": "47056b7ac31965d63984104e589a6883b76d7b29",
+    "https://shiloklein.github.io/my-whatsapp/assets/styles/setup/_variables.scss": "b8f193aae3f9f1f7bfb8d871dcaa715a98e73955",
+    "https://shiloklein.github.io/my-whatsapp/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "https://shiloklein.github.io/my-whatsapp/index.html": "0fe0cad1ef6a0b15e102143b3d13dfead4f255c4",
+    "https://shiloklein.github.io/my-whatsapp/main.63335209b57f751f.js": "c20325f173cf4a246921c5c265be8c656f38f15d",
+    "https://shiloklein.github.io/my-whatsapp/manifest.webmanifest": "ed756c9a5c4e94afe5e64ccdbc6dc2ced269d3d2",
+    "https://shiloklein.github.io/my-whatsapp/polyfills.3c044cbad05b11d0.js": "749ead43a45f207ee48f9cc690631810507590bf",
+    "https://shiloklein.github.io/my-whatsapp/runtime.c8300be582122307.js": "5692c91b8d7345f37a535cf3f05ffc9faebf25fd",
+    "https://shiloklein.github.io/my-whatsapp/styles.cf628c8bf06da1bf.css": "9d3112e9d81fa40f129ab9823d4588765cc2c09e"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
