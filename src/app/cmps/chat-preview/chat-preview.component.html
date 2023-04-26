@@ -1,19 +1,22 @@
-<section class="container main-layout " routerLink="chat/{{chat._id}}" longPress (mouseLongPress)="onLongPress($event)">
+<!-- TODO: put the routerLing from the click in function with condition for creating new chat if there is no chatId -->
+<section class="container main-layout " (click)="openChat()" 
+
+    (mouseLongPress)="onLongPress($event)">
     <div class="chat-preview flex align-center">
         <div class="preview-img">
-            <img [src]="chat.imgUrl">
+            <img [src]="chat?chat.imgUrl:contact.profileImage||avatarImage">
         </div>
-        
+
         <div class="preview-details flex column space-between">
-            <p class="chat-name">{{chat.name}}</p>
-            <p class="chat-content">{{chat.messages[0].from.name}}: {{chat.messages[0].content}}</p> 
-            <!--TODO: GET THE FIRST MESSAGE IN A BETTER WAY-->
+            <p class="chat-name">{{chat?chat.name:contact.fullName}}</p>
+            <p class="chat-content" *ngIf="chat">{{'chat.messages[0].from'}}:
+                {{chat?chat.messages[0].content:contact.about}}</p>
         </div>
-        
+
         <div class="date-container flex column align-center">
-    <p class="time">{{lastMsgTime}}</p>
-    <div *ngIf="chat.unReadCount" class="unread-count">{{chat.unReadCount}}</div>
-    </div>
+            <p class="time" *ngIf="chat">{{lastMsgTime}}</p>
+            <div *ngIf="chat&&chat.unReadCount" class="unread-count">{{chat.unReadCount}}</div>
+        </div>
     </div>
 
 </section>
@@ -23,7 +26,7 @@
 
 
 
-<!-- <p>{{chat._id}}</p>
+<!-- <p>{{chat.id}}</p>
 <p>{{chat.name}}</p>
 <p>{{chat.imgUrl}}</p>
 <div>prticipants: <p *ngFor=" let participant of chat.prticipants">prticipant name: {{participant.name}}</p></div>

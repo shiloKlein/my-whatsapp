@@ -1,16 +1,18 @@
-<section class="group-filter main-layout ">
+<section class="search-input main-layout ">
     <div class="filter-container flex">
         <div class="text-filter flex space-between align-center">
-            <div contenteditable="true" placeholder="Search or start new chat"></div>
+            <div contenteditable="true" [(ngModel)]="searchTerm" placeholder="Search or start new chat" (input)="searchChats()"
+            
+            ></div>
             <span class="material-symbols-outlined">
                 search
             </span>
         </div>
-        <button class="unread-filter">
+        <!-- <button class="unread-filter">
             <span class="material-symbols-outlined">
                 filter_list
             </span>
-        </button>
+        </button> -->
 
     </div>
 </section>

@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
-
+  private debounceSubject = new Subject();
   constructor() { }
+
+  debounce(time: number): Observable<any> {
+    return this.debounceSubject.asObservable().pipe(debounceTime(time));
+  }
+
+  triggerDebounce(data:any) {
+    this.debounceSubject.next(data);
+  }
 
 chatDemoData = [
     "Hey, how are you doing? Everything's good on my end.",

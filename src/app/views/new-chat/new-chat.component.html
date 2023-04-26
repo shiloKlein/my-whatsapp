@@ -1,0 +1,11 @@
+<section>
+    <chat-list-header />
+    <search-input (search)="searchUsers($event)"></search-input>
+    <div class="users-container">
+        <article   *ngFor="let contact of contacts">
+            <chat-preview [contact]="contact" [isNewChat]="true"></chat-preview>
+        
+       </article>
+
+    </div>
+</section>

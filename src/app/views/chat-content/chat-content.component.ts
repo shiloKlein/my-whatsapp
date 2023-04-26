@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Chat, Message, UserDetails } from 'src/app/models/chat.model';
+import { Chat, Message, MessageType, User } from 'src/app/models/chat.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
-import { UtilService } from 'src/app/services/util.service';
-
+import { UtilService } from 'src/app/services/util/util.service';
 
 @Component({
   selector: 'chat-content',
@@ -16,7 +16,8 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private userService: UserService,
-    private utilService:UtilService,
+    private authService: AuthService,
+    private utilService: UtilService,
     private route: ActivatedRoute,
     // private snapShot: ActivatedRouteSnapshot,
     private router: Router,
@@ -25,12 +26,17 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   ) { }
   userId: string = '0101'
   chat!: Chat
-  loggedInUser!: UserDetails
+  newChatUser!: User
+  newChatIsGroup!: Boolean
+  loggedInUser!: User
   subscription!: Subscription
+  MessageType = MessageType
+  avatarImage = this.userService.avatarImage
 
   ngOnInit(): void {
     this.loadChat()
     this.loadUser()
+
   }
 
   ngOnDestroy(): void {
@@ -39,58 +45,73 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   loadChat() {
     console.log('this.route.data', this.route.data)
     const chatId = this.route.snapshot.paramMap.get('id')
-    console.log('id', chatId)
-    if (!chatId) return
-    this.chatService.getChatById(chatId)
-      .subscribe(chat => {
-        console.log('chat', chat)
-        this.chat = chat
+    if (chatId) {
+      console.log('id', chatId)
+      this.chatService.getChatById(chatId)
+        .subscribe(chat => {
+          console.log('chat', chat)
+          this.chat = chat
+        })
+    } else {
+      this.route.queryParams.subscribe(params => {
+        this.newChatIsGroup = params['isGroup'] ? JSON.parse(params['isGroup']) : null;
+      });
+      // const userId = params['userId'] ? params['userId'] : null;
+      this.userService.SelectedUsers$.subscribe(users => {
+        if (users && users.length > 0) {
+          this.newChatUser = users[0]
+        }
       })
+      console.log(this.newChatUser);
+      // Use the user details as needed
+    }
   }
   loadUser() {
-    this.userService.getLoggedInUser()
-      .subscribe(user => this.loggedInUser = user)
+    this.authService.currentUser$.subscribe(user => {
+      this.loggedInUser = user;
+    });
   }
-  checkOwner(id: string): boolean {
-    return this.loggedInUser._id === id
+  checkOwner(id: number): boolean {
+    return this.loggedInUser?.id === id
   }
 
   sendMsg(msg: string) {
-    console.log('this.chat.messages',this.chat)
-    const message:Message = this.chatService.getEmptyMsg()
-    const user = {...this.loggedInUser}
-    message.from = user
+    console.log('this.chat.messages', this.chat)
+    const message: Message = this.chatService.getEmptyMsg()
+    const user = { ...this.loggedInUser }
+    message.from = user.id
     message.content = msg
-    message.isText=true
-  
-    this.chatService.sendMsg(message,this.chat._id)
+    message.type = MessageType.Text
+
+    this.chatService.sendMsg(message, this.chat.id)
 
   }
   sendRecording(recordingDataUrl: string) {
-    const message:Message = this.chatService.getEmptyMsg()
-    const user = {...this.loggedInUser}
-    message.from = user
+    const message: Message = this.chatService.getEmptyMsg()
+    const user = { ...this.loggedInUser }
+    message.from = user.id
     message.content = recordingDataUrl
-    message.isRecording=true
-    this.chatService.sendMsg(message,this.chat._id)
+    message.type = MessageType.Recording
+    this.chatService.sendMsg(message, this.chat.id)
     // console.log('recording(for now the message)', recordingDataUrl)
   }
 
-  sendImg(imgDataUlr:string){
-    const message:Message = this.chatService.getEmptyMsg()
-    const user = {...this.loggedInUser}
-    message.from = user
-    message.content = imgDataUlr
-    message.isImg=true
-    this.chatService.sendMsg(message,this.chat._id)
+  sendImg(imgDataUrl: string) {
+    const message: Message = this.chatService.getEmptyMsg()
+    const user = { ...this.loggedInUser }
+    message.from = user.id
+    message.content = imgDataUrl
+    message.type = MessageType.Image
+    this.chatService.sendMsg(message, this.chat.id)
+    console.log('imgDataUrl', imgDataUrl)
 
   }
 
 }
 
-// class Msg(from:UserDetails, content:string){
+// class Msg(from:User, content:string){
 //   constructor(){
-//     this._id = getRandomIntInclusive(1000000, 9999999)
+//     this.id = getRandomIntInclusive(1000000, 9999999)
 //     this.from = from
 //     content = content
 //     isRead = false

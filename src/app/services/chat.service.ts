@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Chat, Message, User, UserDetails } from '../models/chat.model'
+import { Chat, Message, MessageType, User } from '../models/chat.model'
 
 import { BehaviorSubject, Observable, of } from 'rxjs'
-import { UtilService } from './util.service';
+import { UtilService } from './util/util.service';
 // import { UtilService} from './util.service';
 
 @Injectable({
@@ -13,49 +13,41 @@ export class ChatService {
 
   constructor() { }
   utilService = this.UtilService
-  loggedInUser:UserDetails = {
-    _id: '0101',
-    name: 'Yehuda',
-    imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
+  loggedInUser: User = {
+    id: 1,
+    fullName:'Yehuda Levavi', 
+    profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
     about: '{Gute == Gute()}',
-    phoneNumber: '0538927854'
+    phoneNumber: '0538927854',
+    signupDate: new Date(Date.now() - 9947738)
   }
 
   private _chatsDB: Chat[] = [
     {
-      _id: '101',
+      id: '101',
       name: 'Yehuda',
       imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
       participants: [
         {
-          _id: '0101',
-          name: 'Yehuda',
-          imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
+          id: 1,
+          fullName:'Yehuda Levavi',
+          profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{Gute == Gute()}',
           phoneNumber: '0538927854'
         },
         {
-          _id: '0102',
-          name: 'isic',
-          imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
+          id: 2,
+          fullName: 'Isic Ben-abi',
+          profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{and == friends()}',
           phoneNumber: '0538927854'
         }
       ],
       messages: [
         {
-          _id: '1101',
-          from: {
-            _id: '0101',
-            name: 'Yehuda',
-            imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-            about: '{Gute == Gute()}',
-            phoneNumber: '0538927854'
-          },
-          isText:true,
-          isRecording:false,
-          isVideo:false, 
-isImg:false,
+          id: '1101',
+          from: 1,
+          type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro`,
           isRead: false,
           createdAt: new Date(1674503547763)
@@ -67,90 +59,54 @@ isImg:false,
       createdAt: new Date(1674503547763)
     },
     {
-      _id: '102',
+      id: '102',
       name: 'Isic',
       imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
       participants: [
         {
-          _id: '0101',
-          name: 'Yehuda',
-          imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
+          id: 1,
+          fullName: 'Yehuda Levavi',
+          profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{Gute == Gute()}',
           phoneNumber: '0538927854'
         },
         {
-          _id: '0102',
-          name: 'isic',
-          imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
+          id: 2,
+         fullName: 'Isic Ben-abi',
+          profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{and == friends()}',
           phoneNumber: '0538927854'
         }
       ],
       messages: [
         {
-          _id: '1101',
-          from: {
-            _id: '0102',
-            name: 'isic',
-            imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-            about: '{and == friends()}',
-            phoneNumber: '0538927854'
-          },
-          isText:true,
-          isRecording:false,
-          isVideo:false, 
-isImg:false,
+          id: '1101',
+          from: 2,
+          type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
           isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          _id: '1102',
-          from:  {
-            _id: '0101',
-            name: 'Yehuda',
-            imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-            about: '{Gute == Gute()}',
-            phoneNumber: '0538927854'
-          },
-          isText:true,
-          isRecording:false,
-          isVideo:false, 
-isImg:false,
+          id: '1102',
+          from: 1,
+          type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
           isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          _id: '1102',
-          from:  {
-            _id: '0101',
-            name: 'Yehuda',
-            imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-            about: '{Gute == Gute()}',
-            phoneNumber: '0538927854'
-          },
-          isText:true,
-          isRecording:false,
-          isVideo:false, 
-isImg:false,
+          id: '1102',
+          from: 1,
+          type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
           isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          _id: '1102',
-          from:  {
-            _id: '0101',
-            name: 'Yehuda',
-            imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-            about: '{Gute == Gute()}',
-            phoneNumber: '0538927854'
-          },
-          isText:true,
-          isRecording:false,
-          isVideo:false, 
-isImg:false,
+          id: '1102',
+          from: 1,
+          type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
           isRead: false,
           createdAt: new Date(1674503547763)
@@ -170,19 +126,19 @@ isImg:false,
     this._chats$.next(this._chatsDB)
 
   }
-  getChatById(chatId: string): Observable<Chat>{//Observable<Chat>
-    const chat = this._chatsDB.filter(chat => chat._id === chatId)
+  getChatById(chatId: string): Observable<Chat> {//Observable<Chat>
+    const chat = this._chatsDB.filter(chat => chat.id === chatId)
     return of(...chat)
     // return ''
   }
-  getLoggedInUser(){
-  return of(this.loggedInUser)
+  getLoggedInUser() {
+    return of(this.loggedInUser)
   }
-  sendMsg(message:Message, chatId:string):Message{
-    const chat:Chat[] = [...this._chatsDB.filter(chat => chat._id === chatId)]
-    console.log('chat',chat)
+  sendMsg(message: Message, chatId: string): Message {
+    const chat: Chat[] = [...this._chatsDB.filter(chat => chat.id === chatId)]
+    console.log('chat', chat)
     chat[0].messages.push(message)
-    console.log('logged',this.loggedInUser._id===message.from._id)
+    console.log('logged', this.loggedInUser.id === message.from)
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     // demo
     setTimeout(() => {
@@ -191,46 +147,31 @@ isImg:false,
     // end of demo
     return message
   }
-  recieveMsg(){
-  // demo
-  const chatId = '102'
-  const newMessage = this.getEmptyMsg()
-  newMessage.from = {
-    _id: '0102',
-    name: 'isic',
-    imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
-    about: '{and == friends()}',
-    phoneNumber: '0538927854'
-  }
-  newMessage.isText = true
-  const chat:Chat[] = [...this._chatsDB.filter(chat => chat._id === chatId)]
-  newMessage.content = _getRandomChatMessage()
+  recieveMsg() {
+    // demo
+    const chatId = '102'
+    const newMessage = this.getEmptyMsg()
+    newMessage.from = 2
+    newMessage.type = MessageType.Text
+    const chat: Chat[] = [...this._chatsDB.filter(chat => chat.id === chatId)]
+    newMessage.content = _getRandomChatMessage()
 
-  chat[0].messages.push(newMessage)
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-// TODO: ADD CONDITION. ONLY IF USER VP IS NEAR THE BOTTOM - SCROLL. OTHERWISE ADD A SIGN THAT THERE IS NEW UNREAD MESSAGE
- 
-  return newMessage
-  }
-  getEmptyMsg(){
-  return {
-    _id: _getRandomIntInclusive(1000000, 9999999),
-    from: {
-      _id: '',
-      name: '',
-      imgUrl:'',
-      about:'',
-      phoneNumber:'',
-    },
-    isText:false,
-    isRecording:false,
-    isVideo:false, 
-isImg:false,
-    content:'',
-    isRead:false,
-    createdAt: new Date(),
+    chat[0].messages.push(newMessage)
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+    // TODO: ADD CONDITION. ONLY IF USER VP IS NEAR THE BOTTOM - SCROLL. OTHERWISE ADD A SIGN THAT THERE IS NEW UNREAD MESSAGE
 
-}
+    return newMessage
+  }
+  getEmptyMsg() {
+    return {
+      id: _getRandomIntInclusive(1000000, 9999999),
+      from: 0,
+      type: MessageType.Text,
+      content: '',
+      isRead: false,
+      createdAt: new Date(),
+
+    }
   }
 }
 
@@ -241,7 +182,7 @@ function _getRandomIntInclusive(min: number, max: number): string {
 }
 
 
-function _getRandomChatMessage(){
+function _getRandomChatMessage() {
   const randomIndex = Math.floor(Math.random() * chatDemoData.length);
   return chatDemoData[randomIndex];
 }

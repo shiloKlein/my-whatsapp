@@ -2,9 +2,12 @@
 
 .chat-list-header {
     background-color: $secondery-green;
+    position: relative;
+    z-index: 50;
 
     .logo-container {
         gap: 10px;
+        min-height: 53px;
 
         p {
             color: white;
@@ -24,15 +27,47 @@
         }
     }
 
-    .options {
+    .tools {
         gap: 10px;
     }
 
+    
+    
     span {
         color: white;
-
+        user-select: none;
+        
         &:hover {
             cursor: pointer
         }
+    }
+    
+}
+.options {
+    position: absolute;
+    top: -100px;
+    visibility: none;
+    right: 0;
+    z-index: -10;
+    width: 120px;
+    background-color: $bgc-primery;
+    // border-radius: 8px;
+
+    border-bottom-left-radius: 6px;
+    gap: 5px;
+    transition: 0.3s;
+
+    li {
+        padding: 3px;
+
+        &:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+    &.open {
+        top: 53px;
+        visibility: visible;
+        z-index: 10;
     }
 }

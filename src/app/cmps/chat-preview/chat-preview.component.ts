@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Chat } from 'src/app/models/chat.model';
+import { Router } from '@angular/router';
+import { Chat, User } from 'src/app/models/chat.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'chat-preview',
@@ -8,11 +10,31 @@ import { Chat } from 'src/app/models/chat.model';
 })
 export class ChatPreviewComponent {
   @Input() chat!: Chat
+  @Input() contact!: User
+  @Input() isNewChat!: Boolean
 
-  onLongPress(ev:any){
-    console.log('ev',ev)
+  constructor(private userService: UserService, private router: Router) { }
+  avatarImage = this.userService.avatarImage
+
+  openChat() {
+    if (this.chat){
+      this.router.navigate([`/chat/${this.chat.id}`])
+    }else{
+      this.userService.setSelectedUsers([this.contact])
+      const navigationExtras = {
+        queryParams: {
+          userId: this.contact.id,
+          isGroup:false
+        }
+      };
+      this.router.navigate(['/chat'], navigationExtras);
+    }
+  }
+
+  onLongPress(ev: any) {
+    console.log('ev', ev)
     // ev.preventDefault()
-  console.log('chat pressed longg')
+    console.log('chat pressed longg')
   }
 
   get lastMsgTime() {

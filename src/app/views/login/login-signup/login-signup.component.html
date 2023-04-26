@@ -1,0 +1,16 @@
+<section class="login-container main-layout">
+    <chat-list-header class="full"/>
+    <div *ngIf="isLogin;else signup" class="flex column">
+        <login (loggedIn)="login($event)"></login>
+
+            <p>not a user yet? <button (click)="toggleLoginSignup()"> sign up!</button></p>
+    </div>
+    
+    <ng-template #signup>
+        <div class="flex column">
+            <signup (signedUp)="signUp($event)"></signup>
+            <p>already a user? <button (click)="toggleLoginSignup()"> login!</button></p>
+        </div>
+    </ng-template>
+</section>
+

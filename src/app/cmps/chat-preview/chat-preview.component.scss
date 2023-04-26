@@ -9,7 +9,7 @@
 .chat-preview {
     height: 4.5em;
     min-width: 100%;
-
+    border-bottom: 1px solid $bgc-primery;
     .preview-img {
 
         img {
@@ -25,7 +25,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        border-bottom: 1px solid $bgc-primery;
+        
 
         .chat-name {}
 

@@ -7,7 +7,7 @@ import { AppComponent } from './app-root/app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HomeComponent } from './views/home/home.component';
 import { ChatHeaderComponent } from './cmps/chat-header/chat-header.component';
-import { GroupFilterComponent } from './cmps/group-filter/group-filter.component';
+import { SearchInputComponent } from './cmps/search-input/search-input.component';
 import { ChatFilterComponent } from './cmps/chat-filter/chat-filter.component';
 import { ChatListComponent } from './cmps/chat-list/chat-list.component';
 import { ChatListHeaderComponent } from './cmps/chat-list-header/chat-list-header.component';
@@ -16,13 +16,20 @@ import { ChatContentComponent } from './views/chat-content/chat-content.componen
 import { SendBarComponent } from './cmps/send-bar/send-bar.component';
 import { CameraComponent } from './cmps/camera/camera.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import { LoginSignupComponent } from './views/login/login-signup/login-signup.component';
+import { LoginComponent } from './cmps/login/login.component';
+import { SignupComponent } from './cmps/signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NewChatComponent } from './views/new-chat/new-chat.component';
+import { NgContentEditableModelDirective } from './directives/ng-content-editable-model.directive';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ChatHeaderComponent,
-    GroupFilterComponent,
+    SearchInputComponent,
     ChatFilterComponent,
     ChatListComponent,
     ChatListHeaderComponent,
@@ -30,12 +37,19 @@ import { LongPressDirective } from './directives/long-press.directive';
     ChatContentComponent,
     SendBarComponent,
     CameraComponent,
-    LongPressDirective
+    LongPressDirective,
+    LoginSignupComponent,
+    LoginComponent,
+    SignupComponent,
+    NewChatComponent,
+    NgContentEditableModelDirective,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

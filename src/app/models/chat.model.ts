@@ -1,8 +1,10 @@
+import { Timestamp } from "rxjs"
+
 export interface Chat {
-    _id: string
+    id: string
     name: string
     imgUrl:string
-    participants:UserDetails[]
+    participants:User[]
     messages:Message[]
     unReadCount:number
     isGroup:boolean
@@ -11,31 +13,32 @@ export interface Chat {
 }
 
 export interface Message {
-    _id: string
-    from: UserDetails
+    id: string
+    from: number
     content:string
     isRead:boolean
     createdAt: Date
-    isText:boolean,
-    isRecording:boolean,
-    isVideo:boolean,
-    isImg:boolean
-
+    type:MessageType,
 }
 export interface User {
-    _id: string
-    name: string
-    imgUrl:string
-    about:string
-    phoneNumber:number
-    chats:Chat[]
-
-}
-export interface UserDetails {
-    _id: string
-    name: string
-    imgUrl:string
+    id: number
+    fullName:string,
+    profileImage?:string|null
     about:string
     phoneNumber:string
-
+    signupDate?:Date
 }
+export interface UserAuth{
+    phoneNumber:string
+    password:string
+    fullName?:string
+}
+
+export enum MessageType {
+    Text = "text",
+    Image = "image",
+    Video = "video",
+    Recording = "recording"
+  }
+
+  

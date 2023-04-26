@@ -1,7 +1,7 @@
-<section class="chat-header main-layout">
-    <div *ngIf="!isSearch" class="chat-header-container flex align-center">
+<section class="chat-header main-layout full">
+    <div *ngIf="!isSearch;else search" class="chat-header-container flex align-center">
         
-        <a routerLink="/"><span class="material-symbols-outlined back-arrow" >
+        <a class="back-button" routerLink="/"><span class="material-symbols-outlined back-arrow" >
             arrow_back_ios
             </span></a>
         
@@ -11,7 +11,7 @@
         <div class="group-details flex column">
             <p class="group-name">{{groupName}}</p>
             <p *ngIf="isGroup" class="participants-list flex"><span
-                    *ngFor="let participant of participants">{{participant.name}},</span>
+                    *ngFor="let participant of participants">{{participant.fullName}},</span>
 
             </p>
         </div>
@@ -31,15 +31,15 @@
         </div>
     </div>
 
-
-    <div *ngIf="isSearch" class="chat-header-container search flex align-center">
+<ng-template #search>
+    <div class="chat-header-container search flex align-center">
         <button (click)="closeSearch()" title="back">
             <span class="material-symbols-outlined">
                 arrow_back
             </span>
         </button>
 
-        <input type="text" (input)="search()" placeholder="search">
+        <input type="text" placeholder="search">
 <button>
     <span class="material-symbols-outlined">
         expand_less
@@ -50,6 +50,7 @@
         expand_more
     </span>
 </button>
-
     </div>
+
+</ng-template>
 </section>

@@ -1,19 +1,23 @@
-import { Component, Input } from '@angular/core';
-import { UserDetails } from 'src/app/models/chat.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/models/chat.model';
 
 @Component({
   selector: 'chat-header',
   templateUrl: './chat-header.component.html',
   styleUrls: ['./chat-header.component.scss']
 })
-export class ChatHeaderComponent {
+export class ChatHeaderComponent implements OnInit{
   @Input() imgUrl!: string
-  @Input() participants!: UserDetails[]
-  @Input() groupName!: string
-  @Input() isGroup!: boolean
+  @Input() participants!: User[]|null
+  @Input() groupName!: string|undefined
+  @Input() isGroup!: Boolean
   
-  isSearch: boolean = false
+  isSearch!: Boolean
 
+  ngOnInit() {
+    this.isSearch = false;
+    
+  }
   
   openMenu(): void {
   }

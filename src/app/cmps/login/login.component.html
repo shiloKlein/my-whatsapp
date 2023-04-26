@@ -1,0 +1,6 @@
+
+<form (submit)="login()" class="flex column login-form">
+<input type="text" placeholder="phone number" name="phone-number" [(ngModel)]="phoneNumber">
+<input type="text" placeholder="password" name="password" [(ngModel)]="password">
+<button (click)="login">login</button>
+</form>
