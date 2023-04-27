@@ -1,0 +1,8 @@
+li {
+    padding: 3px;
+
+    &:hover {
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

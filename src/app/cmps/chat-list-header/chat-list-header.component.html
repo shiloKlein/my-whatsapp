@@ -28,8 +28,7 @@
 
     </div>
 </section>
-<ul class=" options flex column justify-center"  (clickOutside)="closeOptions()" [class.open]="optionsOpen">
-    <li class="new-group">New group</li>
-    <li class="settings">Settings</li>
-    <li class="logout" (click)="logout()">Logout</li>
-</ul>
+<div class="options-container" (clickOutside)="closeOptions()" [class.open]="optionsOpen">
+  <options-dropdown (loggedOut)="logout()" [headerType]="'chat-list'"/>  
+</div>
+

@@ -27,6 +27,8 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   userId: string = '0101'
   chat!: Chat
   newChatUser!: User
+  newGroupUsers!: User[]
+  isNewChat!: Boolean
   newChatIsGroup!: Boolean
   loggedInUser!: User
   subscription!: Subscription
@@ -43,23 +45,27 @@ export class ChatContentComponent implements OnInit, OnDestroy {
 
   }
   loadChat() {
-    console.log('this.route.data', this.route.data)
+    this.route.queryParams.subscribe(params => {
+      this.isNewChat = params['isNewChat'] ? JSON.parse(params['isNewChat']) : null;
+    });
     const chatId = this.route.snapshot.paramMap.get('id')
-    if (chatId) {
+    if (!this.isNewChat && chatId) {
       console.log('id', chatId)
       this.chatService.getChatById(chatId)
         .subscribe(chat => {
           console.log('chat', chat)
           this.chat = chat
         })
-    } else {
+    } else if(this.isNewChat) {
       this.route.queryParams.subscribe(params => {
         this.newChatIsGroup = params['isGroup'] ? JSON.parse(params['isGroup']) : null;
       });
       // const userId = params['userId'] ? params['userId'] : null;
       this.userService.SelectedUsers$.subscribe(users => {
-        if (users && users.length > 0) {
+        if(!this.newChatIsGroup&&users && users.length > 0){
           this.newChatUser = users[0]
+        }else if(users && users.length > 0){//new group chat
+        this.newGroupUsers = users
         }
       })
       console.log(this.newChatUser);
@@ -74,12 +80,21 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   checkOwner(id: number): boolean {
     return this.loggedInUser?.id === id
   }
+  async createChat(){
+    const chat = await this.chatService.createChat()
+    console.log('chat', chat);
+    
+  }
 
-  sendMsg(msg: string) {
+  async sendMsg(msg: string) {
+    if(this.isNewChat){
+      console.log('saklfjd')
+    await this.createChat()
+    }
     console.log('this.chat.messages', this.chat)
     const message: Message = this.chatService.getEmptyMsg()
-    const user = { ...this.loggedInUser }
-    message.from = user.id
+  
+    message.from = this.loggedInUser.id
     message.content = msg
     message.type = MessageType.Text
 

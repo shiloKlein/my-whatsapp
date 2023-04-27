@@ -23,7 +23,7 @@ export class ChatPreviewComponent {
       this.userService.setSelectedUsers([this.contact])
       const navigationExtras = {
         queryParams: {
-          userId: this.contact.id,
+          isNewChat: true,
           isGroup:false
         }
       };

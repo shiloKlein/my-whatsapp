@@ -14,7 +14,7 @@ export class AuthService {
   public currentUser$: Observable<User > = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) { 
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    const loggedInUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.currentUserSubject.next(loggedInUser);
   }
 
@@ -23,13 +23,19 @@ export class AuthService {
     return !!localStorage.getItem('currentUser')
   }
 
-  async login(credensials: UserAuth) {
-    const result = await this.http.post<UserAuth>(`${this.baseUrl}/login`, credensials, ).toPromise();
-    if (result !== undefined) {
-      localStorage.setItem('currentUser', JSON.stringify(result));
-      this.currentUserSubject.next(result);
+async login(credensials: UserAuth) {
+    try {
+        const result = await this.http.post<UserAuth>(`${this.baseUrl}/login`, credensials,{ withCredentials: true } ).toPromise();
+        
+        if (result !== undefined) {
+          localStorage.setItem('currentUser', JSON.stringify(result));
+          this.currentUserSubject.next(result);
+        }
+    } catch (err) {
+        console.error('Failed to Login ', err);
+        // Handle the error here
     }
-  }
+}
 
 async signup(newUser: UserAuth) {
   console.log('newUser', newUser);

@@ -12,25 +12,25 @@ export class ChatHeaderComponent implements OnInit{
   @Input() groupName!: string|undefined
   @Input() isGroup!: Boolean
   
-  isSearch!: Boolean
+  // isSearch!: Boolean
 
   ngOnInit() {
-    this.isSearch = false;
+    // this.isSearch = false;
     
   }
   
   openMenu(): void {
   }
 
-  openSearch(): void {
-    this.isSearch=true
-    console.log('this.isSearch',this.isSearch)
-  }
-  closeSearch(){
-    this.isSearch=false
-  }  
+  // openSearch(): void {
+  //   this.isSearch=true
+  //   console.log('this.isSearch',this.isSearch)
+  // }
+  // closeSearch(){
+  //   this.isSearch=false
+  // }  
   
-  search(){
+  // search(){
   
-  }
+  // }
 }

@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewChatComponent } from './views/new-chat/new-chat.component';
 import { NgContentEditableModelDirective } from './directives/ng-content-editable-model.directive';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { OptionsDropdownComponent } from './cmps/options-dropdown/options-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SignupComponent,
     NewChatComponent,
     NgContentEditableModelDirective,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    OptionsDropdownComponent
   ],
   imports: [
     BrowserModule,

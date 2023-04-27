@@ -3,19 +3,23 @@ import { Chat, Message, MessageType, User } from '../models/chat.model'
 
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { UtilService } from './util/util.service';
+import { UserService } from './user.service';
+import { HttpClient } from '@angular/common/http';
 // import { UtilService} from './util.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private UtilService!: UtilService
+  private baseUrl = 'http://localhost:3030/api/chat'
 
-  constructor() { }
-  utilService = this.UtilService
+ 
+  constructor(private http: HttpClient, private utilService: UtilService,
+    private userService: UserService) { }
+  // utilService = this.UtilService
   loggedInUser: User = {
     id: 1,
-    fullName:'Yehuda Levavi', 
+    fullName: 'Yehuda Levavi',
     profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
     about: '{Gute == Gute()}',
     phoneNumber: '0538927854',
@@ -30,7 +34,7 @@ export class ChatService {
       participants: [
         {
           id: 1,
-          fullName:'Yehuda Levavi',
+          fullName: 'Yehuda Levavi',
           profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{Gute == Gute()}',
           phoneNumber: '0538927854'
@@ -72,7 +76,7 @@ export class ChatService {
         },
         {
           id: 2,
-         fullName: 'Isic Ben-abi',
+          fullName: 'Isic Ben-abi',
           profileImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',
           about: '{and == friends()}',
           phoneNumber: '0538927854'
@@ -134,6 +138,25 @@ export class ChatService {
   getLoggedInUser() {
     return of(this.loggedInUser)
   }
+    async createChat(){
+      try {
+        let users
+        this.userService.SelectedUsers$.subscribe(selectedUsers => {
+          console.log(selectedUsers);
+          users=selectedUsers
+          // Do something with the users here
+        });
+        console.log('a;sdfhsa');
+        console.log('users',users)
+        const chatToAdd = { isGroupChat: false, participants: users, name: '' };
+        const result = await this.http.post<any[]>(`${this.baseUrl}`, chatToAdd, { withCredentials: true }).toPromise();
+        console.log('result',result)
+   return result
+      } catch (err) {
+        console.log(err);
+        throw err
+      }
+    }
   sendMsg(message: Message, chatId: string): Message {
     const chat: Chat[] = [...this._chatsDB.filter(chat => chat.id === chatId)]
     console.log('chat', chat)
