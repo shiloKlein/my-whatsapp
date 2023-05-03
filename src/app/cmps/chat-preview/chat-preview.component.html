@@ -4,7 +4,7 @@
     (mouseLongPress)="onLongPress($event)">
     <div class="chat-preview flex align-center">
         <div class="preview-img">
-            <img [src]="chat?chat.imgUrl:contact.profileImage||avatarImage">
+            <img [src]="chat?chat.chatImage:contact.profileImage||avatarImage">
         </div>
 
         <div class="preview-details flex column space-between">

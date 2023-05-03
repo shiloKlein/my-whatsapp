@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Chat, Message, MessageType, User } from '../models/chat.model'
+import { Chat, Message, MessageType, NewMessage, User } from '../models/chat.model'
 
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { UtilService } from './util/util.service';
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class ChatService {
   private baseUrl = 'http://localhost:3030/api/chat'
 
- 
+
   constructor(private http: HttpClient, private utilService: UtilService,
     private userService: UserService) { }
   // utilService = this.UtilService
@@ -26,11 +26,11 @@ export class ChatService {
     signupDate: new Date(Date.now() - 9947738)
   }
 
-  private _chatsDB: Chat[] = [
+  public chatsDB: Chat[] = [
     {
       id: '101',
       name: 'Yehuda',
-      imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
+      chatImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
       participants: [
         {
           id: 1,
@@ -49,23 +49,25 @@ export class ChatService {
       ],
       messages: [
         {
-          id: '1101',
+          id: 1101,
           from: 1,
           type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro`,
-          isRead: false,
+          // isRead: false,
           createdAt: new Date(1674503547763)
         }
       ],
       unReadCount: 0,
-      isGroup: false,
+      isGroupChat: false,
       isMute: false,
-      createdAt: new Date(1674503547763)
+      createdAt: new Date(1674503547763),
+      updatedAt:new Date(1674503549999),
+      createdBy:3
     },
     {
       id: '102',
       name: 'Isic',
-      imgUrl: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
+      chatImage: 'https://res.cloudinary.com/dtcqwwf0m/image/upload/v1674483580/whatsapp/avatar-person_fpflei.png',//has to be changed to rectengle img
       participants: [
         {
           id: 1,
@@ -84,42 +86,44 @@ export class ChatService {
       ],
       messages: [
         {
-          id: '1101',
+          id: 1101,
           from: 2,
           type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
-          isRead: false,
+          // isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          id: '1102',
+          id: 1102,
           from: 1,
           type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
-          isRead: false,
+          // isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          id: '1102',
+          id: 1102,
           from: 1,
           type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
-          isRead: false,
+          // isRead: false,
           createdAt: new Date(1674503547763)
         },
         {
-          id: '1102',
+          id: 1102,
           from: 1,
           type: MessageType.Text,
           content: `i can tell only for myself but it was a good day bro. i dont care why i just want to get to the elipsis thing in css to check if what i did works.`,
-          isRead: false,
+          // isRead: false,
           createdAt: new Date(1674503547763)
         },
       ],
       unReadCount: 0,
-      isGroup: false,
+      isGroupChat: false,
       isMute: false,
-      createdAt: new Date(1674503547763)
+      createdAt: new Date(1674503547763),
+      updatedAt:new Date(1674503549999),
+      createdBy:3
     }
 
   ]
@@ -127,105 +131,31 @@ export class ChatService {
   public chats$ = this._chats$.asObservable()
 
   query() {
-    this._chats$.next(this._chatsDB)
+    this._chats$.next(this.chatsDB)
 
   }
   getChatById(chatId: string): Observable<Chat> {//Observable<Chat>
-    const chat = this._chatsDB.filter(chat => chat.id === chatId)
+    const chat = this.chatsDB.filter(chat => chat.id === chatId)
     return of(...chat)
     // return ''
   }
   getLoggedInUser() {
     return of(this.loggedInUser)
   }
-    async createChat(){
-      try {
-        let users
-        this.userService.SelectedUsers$.subscribe(selectedUsers => {
-          console.log(selectedUsers);
-          users=selectedUsers
-          // Do something with the users here
-        });
-        console.log('a;sdfhsa');
-        console.log('users',users)
-        const chatToAdd = { isGroupChat: false, participants: users, name: '' };
-        const result = await this.http.post<any[]>(`${this.baseUrl}`, chatToAdd, { withCredentials: true }).toPromise();
-        console.log('result',result)
-   return result
-      } catch (err) {
-        console.log(err);
-        throw err
-      }
-    }
-  sendMsg(message: Message, chatId: string): Message {
-    const chat: Chat[] = [...this._chatsDB.filter(chat => chat.id === chatId)]
-    console.log('chat', chat)
-    chat[0].messages.push(message)
-    console.log('logged', this.loggedInUser.id === message.from)
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-    // demo
-    setTimeout(() => {
-      this.recieveMsg()
-    }, 2000);
-    // end of demo
-    return message
-  }
-  recieveMsg() {
-    // demo
-    const chatId = '102'
-    const newMessage = this.getEmptyMsg()
-    newMessage.from = 2
-    newMessage.type = MessageType.Text
-    const chat: Chat[] = [...this._chatsDB.filter(chat => chat.id === chatId)]
-    newMessage.content = _getRandomChatMessage()
-
-    chat[0].messages.push(newMessage)
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-    // TODO: ADD CONDITION. ONLY IF USER VP IS NEAR THE BOTTOM - SCROLL. OTHERWISE ADD A SIGN THAT THERE IS NEW UNREAD MESSAGE
-
-    return newMessage
-  }
-  getEmptyMsg() {
-    return {
-      id: _getRandomIntInclusive(1000000, 9999999),
-      from: 0,
-      type: MessageType.Text,
-      content: '',
-      isRead: false,
-      createdAt: new Date(),
-
+  async createChat() {
+    try {
+      let users
+      this.userService.SelectedUsers$.subscribe(selectedUsers => {
+        users = selectedUsers
+      });
+      const chatToAdd = { isGroupChat: false, participants: users, name: '' };
+      const result = await this.http.post<Chat>(`${this.baseUrl}`, chatToAdd, { withCredentials: true }).toPromise();
+      return result
+    } catch (err) {
+      console.log(err);
+      throw err
     }
   }
+
 }
 
-function _getRandomIntInclusive(min: number, max: number): string {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min) + ''; // The maximum is inclusive and the minimum is inclusive
-}
-
-
-function _getRandomChatMessage() {
-  const randomIndex = Math.floor(Math.random() * chatDemoData.length);
-  return chatDemoData[randomIndex];
-}
-const chatDemoData = [
-  "Hey, how are you doing? Everything's good on my end.",
-  "What's up? Not much, just hanging out. How about you?",
-  "Not much, just enjoying the day. What's new with you?",
-  "I'm good, thanks for asking. How have you been?",
-  "I'm doing well, thanks. How about you?",
-  "I'm great, thanks for asking. How has your day been?",
-  "I'm good, just enjoying some free time. How are things with you?",
-  "Everything's good, thanks. How are you?",
-  "I'm good, just enjoying some relaxation time. What have you been up to?",
-  "I'm good, thanks for asking. How about you?",
-  "I'm doing well, thanks. How have you been?",
-  "Not much, just hanging out. How's everything with you?",
-  "I'm good, thanks for asking. How have you been?",
-  "I'm doing well, thanks. How about you?",
-  "I'm great, thanks for asking. How has your day been?",
-  "I'm good, just enjoying some free time. How are things with you?",
-  "Everything's good, thanks. How are you?",
-  "I'm good, just enjoying some relaxation time. What have you been up to?",
-];

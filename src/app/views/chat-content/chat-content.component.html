@@ -1,6 +1,6 @@
 <section class="chat-content" *ngIf="loggedInUser">
-    <chat-header [participants]="chat?.isGroup?chat.participants:null" [groupName]="chat?chat.name:newChatUser?.fullName" [imgUrl]="avatarImage"
-        [isGroup]="chat?chat.isGroup:newChatIsGroup"/>
+    <chat-header [participants]="chat?.isGroupChat?chat.participants:null" [groupName]="chat?chat.name:newChatUser?.fullName" [imgUrl]="avatarImage"
+        [isGroup]="chat?chat.isGroupChat:newChatIsGroup"/>
    
     <div class="messages-container flex column" *ngIf="chat">
 

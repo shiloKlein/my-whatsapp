@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Chat, Message, MessageType, User } from 'src/app/models/chat.model';
+import { Chat, Message, MessageType, NewMessage, User } from 'src/app/models/chat.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { MessageService } from 'src/app/services/message/message.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
@@ -15,6 +16,7 @@ import { UtilService } from 'src/app/services/util/util.service';
 export class ChatContentComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
+    private messageService: MessageService,
     private userService: UserService,
     private authService: AuthService,
     private utilService: UtilService,
@@ -56,16 +58,16 @@ export class ChatContentComponent implements OnInit, OnDestroy {
           console.log('chat', chat)
           this.chat = chat
         })
-    } else if(this.isNewChat) {
+    } else if (this.isNewChat) {
       this.route.queryParams.subscribe(params => {
         this.newChatIsGroup = params['isGroup'] ? JSON.parse(params['isGroup']) : null;
       });
       // const userId = params['userId'] ? params['userId'] : null;
       this.userService.SelectedUsers$.subscribe(users => {
-        if(!this.newChatIsGroup&&users && users.length > 0){
+        if (!this.newChatIsGroup && users && users.length > 0) {
           this.newChatUser = users[0]
-        }else if(users && users.length > 0){//new group chat
-        this.newGroupUsers = users
+        } else if (users && users.length > 0) {//new group chat
+          this.newGroupUsers = users
         }
       })
       console.log(this.newChatUser);
@@ -80,44 +82,46 @@ export class ChatContentComponent implements OnInit, OnDestroy {
   checkOwner(id: number): boolean {
     return this.loggedInUser?.id === id
   }
-  async createChat(){
-    const chat = await this.chatService.createChat()
-    console.log('chat', chat);
-    
+  async createChat() {
+    try {
+      const chat = await this.chatService.createChat()
+      if(chat)this.chat = chat
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   async sendMsg(msg: string) {
-    if(this.isNewChat){
-      console.log('saklfjd')
-    await this.createChat()
+    if (this.isNewChat) {
+      await this.createChat()
     }
-    console.log('this.chat.messages', this.chat)
-    const message: Message = this.chatService.getEmptyMsg()
-  
-    message.from = this.loggedInUser.id
+
+    const message: NewMessage = this.messageService.getEmptyMsg()
+
+    // message.from = this.loggedInUser.id
     message.content = msg
     message.type = MessageType.Text
 
-    this.chatService.sendMsg(message, this.chat.id)
+    this.messageService.sendMsg(message, this.chat.id)
 
   }
   sendRecording(recordingDataUrl: string) {
-    const message: Message = this.chatService.getEmptyMsg()
+    const message: NewMessage = this.messageService.getEmptyMsg()
     const user = { ...this.loggedInUser }
-    message.from = user.id
+    // message.from = user.id
     message.content = recordingDataUrl
     message.type = MessageType.Recording
-    this.chatService.sendMsg(message, this.chat.id)
+    this.messageService.sendMsg(message, this.chat.id)
     // console.log('recording(for now the message)', recordingDataUrl)
   }
 
   sendImg(imgDataUrl: string) {
-    const message: Message = this.chatService.getEmptyMsg()
+    const message: NewMessage = this.messageService.getEmptyMsg()
     const user = { ...this.loggedInUser }
-    message.from = user.id
+    // message.from = user.id
     message.content = imgDataUrl
     message.type = MessageType.Image
-    this.chatService.sendMsg(message, this.chat.id)
+    this.messageService.sendMsg(message, this.chat.id)
     console.log('imgDataUrl', imgDataUrl)
 
   }
